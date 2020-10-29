@@ -313,11 +313,11 @@ void initializeItems(vector<Item*>* items)
   Item* remote = new Item();
   remote -> setName((char*)("boots"));
   remote -> setId(4);
-  items -> push_back(boots);
+  items -> push_back(remote);
   Item* tbrush = new Item();
   tbrush -> setName((char*)("toilet paper. Be prepared."));
   tbrush -> setId(5);
-  items -> push_back(tp);
+  items -> push_back(tbrush);
   Item* laptop = new Item();
   laptop -> setName((char*)("laptop"));
   laptop -> setId(1);

@@ -81,7 +81,7 @@ int main()
       }
       else
       {
-	cout << endl << "There is nothing in you inventory." << endl;
+	cout << endl << "You're broke, there's nothing in your inventory" << endl;
       }
     }
     else if (strcmp(input, "get") == 0)
@@ -104,10 +104,59 @@ int main()
     else if (strcmp(input, "help") == 0)
     {
       cout << "You have the following commands: go, get, drop, inventory, quit, and help." << endl;
-      cout << "Don't be afraid, this is your own house..." << endl;
+      cout << "Don't be afraid, don't you know aliens don't enter unless invited inside?" << endl;
     }
     else
     {
       cout << endl <<"Invalid input." << endl;
     }
+
+    //win conditions
+    for (int a = 0; a < inventory.size(); a++) {
+      for (int b = 0; b < inventory.size(); b++) {
+	for (int c = 0; c < inventory.size(); c++) {
+	  if (currentRoom == 1 && inventory[a] == 1 && inventory[b] == 2 && inventory[c] == 3) {
+	    cout << endl << "You have the items to beat those Aliens!" << endl << endl;
+	    return 0;
+	  }
+	}
+      }
+    }
+    //lose conditions
+    for (int a = 0; a < inventory.size(); a++) {
+      if (inventory[a] == 4 || inventory[a] == 5) {
+	cout << endl << "Hey! You don't need those items." << endl;
+	cout << "You lose! :(" << endl << endl;
+	return 0;
+      }
+    }
+  }
+  
+  return 0;
+    
+}
+//movement
+int move(vector<Room*>* rooms, int currentRoom, char direction[])
+{
+  vector<Room*>::iterator i;
+  for(i = rooms->begin(); i != rooms->end(); i++)
+  {
+    //find current room
+    if (currentRoom == (*i)->getId())
+    {
+      map<int, char*> exits;
+      exits = *(*i) -> getExits();
+      //get exits
+      map<int, char*>::const_iterator m;
+      for (m = exits.begin(); m != exits.end(); ++m)
+      {
+	if (strcmp(m -> second, direction) == 0)
+	{
+	  //int move will be the room player is going to
+	  return m -> first;
+	}
+      }
+    }
+  }
+  return 0;
 }

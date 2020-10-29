@@ -379,9 +379,9 @@ void printInventory(vector<Item*>* items, vector<int> inv)
   vector<Item*>::iterator i;
   for (i = items->begin(); i != items->end(); i++)
   {
-    for (int a = 0; a < invtry.size(); a++)
+    for (int a = 0; a < inv.size(); a++)
     {
-      if (invtry[a] == (*i) -> getId())
+      if (inv[a] == (*i) -> getId())
       {
 	cout << (*i) -> getName() << " ";
       }
@@ -390,7 +390,7 @@ void printInventory(vector<Item*>* items, vector<int> inv)
   cout << endl;
 }
 //getting items
-void getItem(vector<Room*>* rooms, vector<Item*>* items,vector<int>* invtry, int currentRoom, char name[])
+void getItem(vector<Room*>* rooms, vector<Item*>* items,vector<int>* inv, int currentRoom, char name[])
 {
   vector<Room*>::iterator r;
   vector<Item*>::iterator i;
@@ -404,7 +404,7 @@ void getItem(vector<Room*>* rooms, vector<Item*>* items,vector<int>* invtry, int
 	if (((*r) -> getItem() == (*i) -> getId()) && (strcmp((*i) -> getName(), name) == 0))
 	{
 	  //add to inventory
-	  invtry -> push_back((*i) -> getId());
+	  inv -> push_back((*i) -> getId());
 	  //set no item in room
 	  (*r) -> setItem(0);
 	  cout << endl << "Picked up " << (*i) -> getName() << "." << endl;
@@ -417,7 +417,7 @@ void getItem(vector<Room*>* rooms, vector<Item*>* items,vector<int>* invtry, int
 }
 //dropping items
 //i hated doing this
-void dropItem(vector<Room*>* rooms, vector<Item*>* items, vector<int>* invtry, int currentRoom, char name[]) {
+void dropItem(vector<Room*>* rooms, vector<Item*>* items, vector<int>* inv, int currentRoom, char name[]) {
   int counter;
   vector<Room*>::iterator r;
   vector<Item*>::iterator i;
@@ -441,7 +441,8 @@ void dropItem(vector<Room*>* rooms, vector<Item*>* items, vector<int>* invtry, i
 	    for (iv = inv -> begin(); iv != inv -> end(); iv++)
 	    {
 	      //if item is in inventory
-	      if ((*iv) == (*i) -> getId()) {
+	      if ((*iv) == (*i) -> getId())
+	      {
 		cout << endl << "Dropped " << (*i) -> getName() << "." << endl;
 		//set item in current room
 		(*r) -> setItem((*i) -> getId());
@@ -451,13 +452,15 @@ void dropItem(vector<Room*>* rooms, vector<Item*>* items, vector<int>* invtry, i
 	      }
 	    }
 	  }
-	  else if (counter == items -> size() - 1) {
+	  else if (counter == items -> size() - 1)
+	  {
 	    cout << endl << "You don't own that item!" << endl;
 	  }
 	  counter++;
 	}
       }
-      else {
+      else
+      {
 	cout << endl << "You can't place that here!" << endl;
       }
     }

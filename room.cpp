@@ -9,6 +9,10 @@ Room::Room()
 {
 
 }
+char* Room::getDescription()
+{
+  return description;
+}
 
 //I think that's right?
 map<int,char*>* Room::getExits()

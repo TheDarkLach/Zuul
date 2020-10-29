@@ -216,15 +216,15 @@ void initializeRooms(vector<Room*>* rooms)
   temp.insert(pair<int, char*> (8, south));
   temp.insert(pair<int, char*> (6, east));
   living -> setExits(temp);
-  living -> setItem(4/*remote*/);
+  living -> setItem(4/*boots, cant run from aliens in slides right?*/);
   rooms -> push_back(living);
   temp.clear();
   Room* bath = new Room();
-  bath -> setDescription((char*)("in the bathroom."));
+  bath -> setDescription((char*)("in the bathroom. Maybe you should go before it's too late?"));
   bath -> setId(5);
   temp.insert(pair<int, char*> (2, south));
   bath -> setExits(temp);
-  bath -> setItem(5/*toothbrush*/);
+  bath -> setItem(5/*toilet paper, can never be too careful*/);
   rooms -> push_back(bath);
   temp.clear();
   Room* guest = new Room();
@@ -305,4 +305,29 @@ void initializeRooms(vector<Room*>* rooms)
   shed -> setItem(0);
   rooms -> push_back(shed);
   temp.clear();
+}
+
+//init items
+void initializeItems(vector<Item*>* items)
+{
+  Item* boots = new Item();
+  remote -> setName((char*)("boots"));
+  remote -> setId(4);
+  items -> push_back(boots);
+  Item* tp = new Item();
+  tbrush -> setName((char*)("toilet paper. Be prepared."));
+  tbrush -> setId(5);
+  items -> push_back(tp);
+  Item* laptop = new Item();
+  laptop -> setName((char*)("laptop"));
+  laptop -> setId(1);
+  items -> push_back(laptop);
+  Item* bcase = new Item();
+  bcase -> setName((char*)("briefcase. What's inside?"));
+  bcase -> setId(2);
+  items -> push_back(bcase);
+  Item* ck = new Item();
+  ck -> setName((char*)("Shield"));
+  ck -> setId(3);
+  items -> push_back(ck);
 }

@@ -339,9 +339,10 @@ void printRoom(vector<Room*>* rooms, vector<Item*>* items, int currentRoom)
   vector<Item*>::iterator i;
   for (r = rooms->begin(); r != rooms->end(); r++)
   {
-    if (currentRoom == (*r)->getId()) {
+    if (currentRoom == (*r)->getId())
+    {
       cout << (*r)->getDescription() << endl;
-      cout << "  Exits: ";
+      cout << "Exits: ";
       //exits
       //pointers really suck for memory
       for (map<int, char*>::const_iterator it = (*r) -> getExits() -> begin(); it != (*r) -> getExits() -> end(); it++)
@@ -351,8 +352,9 @@ void printRoom(vector<Room*>* rooms, vector<Item*>* items, int currentRoom)
       }
       cout << endl;
       //items
-      cout << "  Items in this room: ";
-      int itemCount = 0; //for "no item" message
+      cout << "Items in this room: ";
+      //for no items
+      int itemCount = 0;
       for (i = items->begin(); i != items->end(); i++) {
 	if ((*r)->getItem() == (*i)->getId()) {
 	  //print spcific item
@@ -360,11 +362,30 @@ void printRoom(vector<Room*>* rooms, vector<Item*>* items, int currentRoom)
 	  itemCount++;
 	}
       }
-      if (itemCount == 0) {
+      if (itemCount == 0)
+      {
 	cout << "no items in here." << endl;
-      } else {
-      cout << endl;
+      }
+      else
+      {
+	cout << endl;
       }
     }
   }
+}
+//print inv
+void printInventory(vector<Item*>* items, vector<int> inv)
+{
+  vector<Item*>::iterator i;
+  for (i = items->begin(); i != items->end(); i++)
+  {
+    for (int a = 0; a < invtry.size(); a++)
+    {
+      if (invtry[a] == (*i) -> getId())
+      {
+	cout << (*i) -> getName() << " ";
+      }
+    }
+  }
+  cout << endl;
 }

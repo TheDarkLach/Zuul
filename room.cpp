@@ -27,7 +27,7 @@ int Room::getId()
 
 int Room::getItem()
 {
-  return &item;
+  return item;
 }
 
 //setters

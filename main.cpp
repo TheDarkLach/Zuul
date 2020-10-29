@@ -1,4 +1,12 @@
 #include <iostream>
+#include <cstring>
+#include <vector>
+#include <iomanip>
+#include <map>
+#include <algorithm>
+
+#include "room.h"
+#include "item.h"
 
 using namespace std;
 
@@ -23,7 +31,10 @@ int main()
   vector<Item*> itemList;
   vector<int> inventory;
 
-  char input[30]; //cstring for user inputs
+  //cstring input
+  char input[30];
+  
+  //gotta start somewhere right?
   int currentRoom = 1;
 
   initializeRooms(&roomList);
@@ -61,15 +72,20 @@ int main()
 	currentRoom = move(&roomList, currentRoom, input);
       }
     }
-    else if (strcmp(input, "inventory") == 0) {
-      if (inventory.size() != 0) {
+    else if (strcmp(input, "inventory") == 0)
+    {
+      if (inventory.size() != 0)
+      {
 	cout << endl << "You have: ";
 	printInventory(&itemList, inventory);
-      } else {
+      }
+      else
+      {
 	cout << endl << "There is nothing in you inventory." << endl;
       }
     }
-    else if (strcmp(input, "get") == 0) {
+    else if (strcmp(input, "get") == 0)
+    {
       //get item from that room
       cout << "What item would you like to get: " << endl;
       cin >> input;
@@ -77,18 +93,21 @@ int main()
       cin.ignore(10000, '\n');
       getItem(&roomList, &itemList, &inventory, currentRoom, input);
     }
-    else if (strcmp(input, "drop") == 0) {
+    else if (strcmp(input, "drop") == 0)
+    {
       cout << "What would you like to drop?" << endl;
       cin >> input;
       cin.clear();
       cin.ignore(10000, '\n');
       dropItem(&roomList, &itemList, &inventory, currentRoom, input);
     }
-    else if (strcmp(input, "help") == 0) {
+    else if (strcmp(input, "help") == 0)
+    {
       cout << "You have the following commands: go, get, drop, inventory, quit, and help." << endl;
       cout << "Don't be afraid, this is your own house..." << endl;
     }
-    else {
+    else
+    {
       cout << endl <<"Invalid input." << endl;
     }
 }

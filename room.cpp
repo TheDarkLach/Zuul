@@ -26,3 +26,25 @@ int Room::getItem()
   return &item;
 }
 
+//setters
+void Room::setId(int newId)
+{
+  id = newId;
+}
+
+void Room::setItem(int newItem)
+{
+  item = newItem;
+}
+
+
+void Room::setDescription(char* newDescription)
+{
+  description = newDescription;
+}
+
+void Room::setExits(map<int, char*> newExits)
+{
+  exits = newExits;
+}
+

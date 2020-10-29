@@ -311,12 +311,12 @@ void initializeRooms(vector<Room*>* rooms)
 void initializeItems(vector<Item*>* items)
 {
   Item* boots = new Item();
-  remote -> setName((char*)("boots"));
-  remote -> setId(4);
+  boots -> setName((char*)("boots"));
+  boots -> setId(4);
   items -> push_back(boots);
   Item* tp = new Item();
-  tbrush -> setName((char*)("toilet paper. Be prepared."));
-  tbrush -> setId(5);
+  tp -> setName((char*)("toilet paper. Be prepared."));
+  tp -> setId(5);
   items -> push_back(tp);
   Item* laptop = new Item();
   laptop -> setName((char*)("laptop"));

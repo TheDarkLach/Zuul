@@ -16,9 +16,9 @@ void initializeItems(vector<Item*>* items);
 
 //functions
 void printRoom(vector<Room*>* rooms, vector<Item*>* items, int currentRoom);
-void printInventory(vector<Item*>* items, vector<int> inv);
-void getItem(vector<Room*>* rooms, vector<Item*>* items,vector<int>* inv, int currentRoom, char name[]);
-void dropItem(vector<Room*>* rooms, vector<Item*>* items, vector<int>* inv, int currentRoom, char name[]);
+void printInventory(vector<Item*>* items, vector<int> invtry);
+void getItem(vector<Room*>* rooms, vector<Item*>* items,vector<int>* invtry, int currentRoom, char name[]);
+void dropItem(vector<Room*>* rooms, vector<Item*>* items, vector<int>* invtry, int currentRoom, char name[]);
 
 //move function (returns int of room going to or a 0 if no room there)
 int move(vector<Room*>* rooms, int currentRoom, char direction[]);
@@ -310,14 +310,14 @@ void initializeRooms(vector<Room*>* rooms)
 //init items
 void initializeItems(vector<Item*>* items)
 {
-  Item* remote = new Item();
-  remote -> setName((char*)("boots"));
-  remote -> setId(4);
-  items -> push_back(remote);
-  Item* tbrush = new Item();
-  tbrush -> setName((char*)("toilet paper. Be prepared."));
-  tbrush -> setId(5);
-  items -> push_back(tbrush);
+  Item* boots = new Item();
+  boots -> setName((char*)("boots"));
+  boots -> setId(4);
+  items -> push_back(boots);
+  Item* tp = new Item();
+  tp -> setName((char*)("toilet paper. Be prepared."));
+  tp -> setId(5);
+  items -> push_back(tp);
   Item* laptop = new Item();
   laptop -> setName((char*)("laptop"));
   laptop -> setId(1);
@@ -374,14 +374,14 @@ void printRoom(vector<Room*>* rooms, vector<Item*>* items, int currentRoom)
   }
 }
 //print inv
-void printInventory(vector<Item*>* items, vector<int> inv)
+void printInventory(vector<Item*>* items, vector<int> invtry)
 {
   vector<Item*>::iterator i;
   for (i = items->begin(); i != items->end(); i++)
   {
-    for (int a = 0; a < inv.size(); a++)
+    for (int a = 0; a < invtry.size(); a++)
     {
-      if (inv[a] == (*i) -> getId())
+      if (invtry[a] == (*i) -> getId())
       {
 	cout << (*i) -> getName() << " ";
       }
@@ -390,7 +390,7 @@ void printInventory(vector<Item*>* items, vector<int> inv)
   cout << endl;
 }
 //getting items
-void getItem(vector<Room*>* rooms, vector<Item*>* items,vector<int>* inv, int currentRoom, char name[])
+void getItem(vector<Room*>* rooms, vector<Item*>* items,vector<int>* invtry, int currentRoom, char name[])
 {
   vector<Room*>::iterator r;
   vector<Item*>::iterator i;
@@ -404,7 +404,7 @@ void getItem(vector<Room*>* rooms, vector<Item*>* items,vector<int>* inv, int cu
 	if (((*r) -> getItem() == (*i) -> getId()) && (strcmp((*i) -> getName(), name) == 0))
 	{
 	  //add to inventory
-	  inv -> push_back((*i) -> getId());
+	  invtry -> push_back((*i) -> getId());
 	  //set no item in room
 	  (*r) -> setItem(0);
 	  cout << endl << "Picked up " << (*i) -> getName() << "." << endl;
@@ -417,7 +417,7 @@ void getItem(vector<Room*>* rooms, vector<Item*>* items,vector<int>* inv, int cu
 }
 //dropping items
 //i hated doing this
-void dropItem(vector<Room*>* rooms, vector<Item*>* items, vector<int>* inv, int currentRoom, char name[]) {
+void dropItem(vector<Room*>* rooms, vector<Item*>* items, vector<int>* invtry, int currentRoom, char name[]) {
   int counter;
   vector<Room*>::iterator r;
   vector<Item*>::iterator i;
@@ -438,7 +438,7 @@ void dropItem(vector<Room*>* rooms, vector<Item*>* items, vector<int>* inv, int 
 	  if (strcmp((*i) -> getName(), name) == 0)
 	  {
 	    //through inv
-	    for (iv = inv -> begin(); iv != inv -> end(); iv++)
+	    for (iv = invtry -> begin(); iv != invtry -> end(); iv++)
 	    {
 	      //if item is in inventory
 	      if ((*iv) == (*i) -> getId())
@@ -447,7 +447,7 @@ void dropItem(vector<Room*>* rooms, vector<Item*>* items, vector<int>* inv, int 
 		//set item in current room
 		(*r) -> setItem((*i) -> getId());
 		//remove item from inventory
-		iv = inv -> erase(iv);
+		iv = invtry -> erase(iv);
 		return;
 	      }
 	    }

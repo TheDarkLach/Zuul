@@ -3,7 +3,7 @@ north
 go
 north
 get
-hammer
+shield
 go
 south
 go

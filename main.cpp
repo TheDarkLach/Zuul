@@ -389,3 +389,29 @@ void printInventory(vector<Item*>* items, vector<int> inv)
   }
   cout << endl;
 }
+//getting items
+void getItem(vector<Room*>* rooms, vector<Item*>* items,vector<int>* invtry, int currentRoom, char name[])
+{
+  vector<Room*>::iterator r;
+  vector<Item*>::iterator i;
+  for (r = rooms->begin(); r != rooms->end(); r++)
+  {
+    if (currentRoom == (*r) -> getId())
+    {
+      for (i = items->begin(); i != items->end(); i++)
+      {
+	//if item is in the room
+	if (((*r) -> getItem() == (*i) -> getId()) && (strcmp((*i) -> getName(), name) == 0))
+	{
+	  //add to inventory
+	  invtry -> push_back((*i) -> getId());
+	  //set no item in room
+	  (*r) -> setItem(0);
+	  cout << endl << "Picked up " << (*i) -> getName() << "." << endl;
+	  return;
+	}
+      }
+    } 
+  }
+  cout << "Wait a minute! that item doesn't exist" << endl;
+}

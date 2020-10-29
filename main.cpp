@@ -331,3 +331,40 @@ void initializeItems(vector<Item*>* items)
   ck -> setId(3);
   items -> push_back(ck);
 }
+
+//print room function
+void printRoom(vector<Room*>* rooms, vector<Item*>* items, int currentRoom)
+{
+  vector<Room*>::iterator r;
+  vector<Item*>::iterator i;
+  for (r = rooms->begin(); r != rooms->end(); r++)
+  {
+    if (currentRoom == (*r)->getId()) {
+      cout << (*r)->getDescription() << endl;
+      cout << "  Exits: ";
+      //exits
+      //pointers really suck for memory
+      for (map<int, char*>::const_iterator it = (*r) -> getExits() -> begin(); it != (*r) -> getExits() -> end(); it++)
+      {
+	//printing exits
+	cout << it -> second << " ";
+      }
+      cout << endl;
+      //items
+      cout << "  Items in this room: ";
+      int itemCount = 0; //for "no item" message
+      for (i = items->begin(); i != items->end(); i++) {
+	if ((*r)->getItem() == (*i)->getId()) {
+	  //print spcific item
+	  cout << (*i)->getName();
+	  itemCount++;
+	}
+      }
+      if (itemCount == 0) {
+	cout << "no items in here." << endl;
+      } else {
+      cout << endl;
+      }
+    }
+  }
+}

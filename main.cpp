@@ -415,3 +415,51 @@ void getItem(vector<Room*>* rooms, vector<Item*>* items,vector<int>* invtry, int
   }
   cout << "Wait a minute! that item doesn't exist" << endl;
 }
+//dropping items
+//i hated doing this
+void dropItem(vector<Room*>* rooms, vector<Item*>* items, vector<int>* invtry, int currentRoom, char name[]) {
+  int counter;
+  vector<Room*>::iterator r;
+  vector<Item*>::iterator i;
+  vector<int>::iterator iv;
+  //iterate through rooms
+  for(r = rooms->begin(); r != rooms->end(); r++)
+  {
+    //if in currentRoom
+    if(currentRoom == (*r) -> getId())
+    {
+      //if no items in the room (maximum of one)
+      if ((*r) -> getItem() == 0)
+      {
+	//iterate through items
+	for (i = items->begin(); i != items->end(); i++)
+	{
+	  //if item exists 
+	  if (strcmp((*i) -> getName(), name) == 0)
+	  {
+	    //through inv
+	    for (iv = inv -> begin(); iv != inv -> end(); iv++)
+	    {
+	      //if item is in inventory
+	      if ((*iv) == (*i) -> getId()) {
+		cout << endl << "Dropped " << (*i) -> getName() << "." << endl;
+		//set item in current room
+		(*r) -> setItem((*i) -> getId());
+		//remove item from inventory
+		iv = inv -> erase(iv);
+		return;
+	      }
+	    }
+	  }
+	  else if (counter == items -> size() - 1) {
+	    cout << endl << "You don't own that item!" << endl;
+	  }
+	  counter++;
+	}
+      }
+      else {
+	cout << endl << "You can't place that here!" << endl;
+      }
+    }
+  }
+}
